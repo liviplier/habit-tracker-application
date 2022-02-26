@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habit_tracker/app_colors.dart';
-
-bool isDark = false;
+import 'package:habit_tracker/screens/widgets/theme_changer.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);

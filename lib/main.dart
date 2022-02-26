@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:habit_tracker/app_routes.dart';
@@ -10,9 +11,13 @@ import 'package:habit_tracker/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // FirebaseApp firebaseApp = Firebase.app('Habit Tracker');
+  // FirebaseFirestore firestore = FirebaseFirestore.instanceFor(app: firebaseApp);
+  FirebaseFirestore.instance.settings =
+      const Settings(persistenceEnabled: false);
   runApp(const MyApp());
 }
 
@@ -26,10 +31,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // theme: ,
         initialRoute: AppRoutes.welcome,
         routes: <String, WidgetBuilder>{
-          AppRoutes.welcome: (_) => WelcomeScreen(),
+          AppRoutes.welcome: (_) => const WelcomeScreen(),
           AppRoutes.login: (_) => const LoginScreen(),
           AppRoutes.signup: (_) => const SignUpScreen(),
           AppRoutes.forgotPassword: (_) => const ForgotPasswordScreen(),

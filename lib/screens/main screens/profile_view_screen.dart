@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habit_tracker/cubit/auth_cubit.dart';
 import 'package:habit_tracker/screens/profile_edit_screen.dart';
 import 'package:habit_tracker/screens/widgets/buttons.dart';
+import 'package:habit_tracker/screens/widgets/theme_changer.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -19,14 +19,15 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  // FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  bool isDark = false;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final String? url = FirebaseAuth.instance.currentUser!.photoURL;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           Center(
             child: Stack(
@@ -35,7 +36,7 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Material(
                     color: Colors.transparent,
                     child: Image(
-                      image: NetworkImage(""), // get image from database
+                      image: NetworkImage(url!), // get image from database
                       width: 128,
                       height: 128,
                       fit: BoxFit.cover,
@@ -48,13 +49,13 @@ class _ProfileViewState extends State<ProfileView> {
                   child: ClipOval(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => ProfileEdit()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => const ProfileEdit()));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         color: AppColors.mainColor,
-                        child: Icon(
+                        child: const Icon(
                           Icons.edit,
                           color: AppColors.darkText1,
                           size: 20,
@@ -90,7 +91,7 @@ class _ProfileViewState extends State<ProfileView> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                "", // name from database
+                firebaseUser!.displayName!, // name from database
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 25,
@@ -123,7 +124,7 @@ class _ProfileViewState extends State<ProfileView> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                "", // email from database
+                firebaseUser!.email!, // email from database
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 25,
@@ -135,32 +136,16 @@ class _ProfileViewState extends State<ProfileView> {
           const SizedBox(
             height: 25,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Text("Dark Mode"),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Switch(
-                  activeColor: AppColors.mainColor,
-                  value: isDark,
-                  onChanged: (isDarkMode) {
-                    isDark = !isDark;
-                  },
-                ),
-              ),
-            ],
-          ),
+          const ThemeChanger(),
           const SizedBox(
             height: 25,
           ),
           Center(
             child: ButtonWidget(
               width: 144,
-              onPressed: () {},
+              onPressed: () {
+                firebaseAuth.signOut();
+              },
               text: "Logout",
             ),
           ) // logout
@@ -168,18 +153,4 @@ class _ProfileViewState extends State<ProfileView> {
       ),
     );
   }
-}
-
-class UserDetials {
-  final String imagePath;
-  final String name;
-  final String email;
-  final bool isDarkMode;
-
-  UserDetials({
-    required this.imagePath,
-    required this.name,
-    required this.email,
-    required this.isDarkMode,
-  });
 }

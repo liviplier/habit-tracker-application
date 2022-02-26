@@ -1,7 +1,8 @@
+// ignore_for_file: empty_catches, unused_catch_clause
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:habit_tracker/habit_detail.dart';
 
 part 'app_state.dart';
 
@@ -24,9 +25,14 @@ class AppCubit extends Cubit<AppState> {
     try {} on FirebaseAuthException catch (e) {}
   }
 
-  Future editHabit(String uid, String hid) async {
+  Future editHabit(String name, bool often, bool perDay, bool? perWeek,
+      bool timeOfDay) async {
     emit(HomeLoadingState());
-    try {} on FirebaseAuthException catch (e) {}
+    try {
+      // emit();
+    } on FirebaseAuthException catch (e) {
+      // emit(); display error
+    }
   }
 
   Future viewProfile(String uid, String hid) async {
@@ -39,8 +45,8 @@ class AppCubit extends Cubit<AppState> {
     try {} on FirebaseAuthException catch (e) {}
   }
 
-  detailScreen(HabitDetails) {
-    emit(HomeLoadedState(HabitDetails));
+  detailScreen() {
+    emit(const HomeLoadedState());
   }
 }
 

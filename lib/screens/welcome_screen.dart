@@ -2,10 +2,9 @@ import 'package:habit_tracker/app_colors.dart';
 import 'package:habit_tracker/screens/forms/login_screen.dart';
 import 'package:habit_tracker/screens/forms/signup_screen.dart';
 import 'package:habit_tracker/screens/widgets/buttons.dart';
+import 'package:habit_tracker/screens/widgets/theme_changer.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/material.dart';
-
-bool isDark = false;
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

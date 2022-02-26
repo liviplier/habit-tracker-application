@@ -4,6 +4,7 @@ import 'package:habit_tracker/app_colors.dart';
 import 'package:habit_tracker/cubit/app_cubit.dart';
 import 'package:habit_tracker/screens/popup%20screens/habit_edit_screen.dart';
 import 'package:habit_tracker/screens/widgets/hero_dialog_route.dart';
+import 'package:habit_tracker/screens/widgets/theme_changer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,7 +15,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> info = [];
-  bool isDark = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          BlocProvider.of<AppCubit>(context).detailScreen(info);
+                          // BlocProvider.of<AppCubit>(context).detailScreen(info);
                         },
                         child: Container(
                           width: 200,
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: BlocBuilder<AppCubit, AppState>(
                               builder: (context, state) {
                                 if (state is HomeLoadedState) {
-                                  var info = state.habits;
+                                  // var info = state.habits;
                                   return Text(
                                     info[index]
                                         .toString(), // name .name not toStrin
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 3,
         onPressed: () {
           Navigator.of(context)
-              .push(HeroDialogRoute(builder: (_) => EditScreen()));
+              .push(HeroDialogRoute(builder: (_) => const EditScreen()));
         },
         tooltip: 'Create Habit',
         child: Icon(

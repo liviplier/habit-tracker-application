@@ -4,6 +4,7 @@ import 'package:habit_tracker/screens/main%20screens/home_screen.dart';
 import 'package:habit_tracker/screens/main%20screens/overview_screen.dart';
 import 'package:habit_tracker/screens/main%20screens/profile_view_screen.dart';
 import 'package:habit_tracker/screens/main%20screens/search_screen.dart';
+import 'package:habit_tracker/screens/widgets/theme_changer.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -13,8 +14,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  bool isDark = false;
-
   List screensList = [
     const HomeScreen(),
     const SearchScreen(),

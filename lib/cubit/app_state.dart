@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields, annotate_overrides
+
 part of 'app_cubit.dart';
 
 abstract class AppState extends Equatable {
@@ -19,26 +21,31 @@ class HomeLoadingState extends AppState {
 }
 
 class HomeLoadedState extends AppState {
-  const HomeLoadedState(this.habits);
-  final List<HabitDetails> habits;
+  const HomeLoadedState();
   @override
-  List<Object> get props => [habits];
+  List<Object> get props => [];
 }
 
 class CreateHabitState extends AppState {
-  const CreateHabitState(this.habit);
-  final List<HabitDetails> habit;
+  const CreateHabitState();
 
   @override
-  List<Object> get props => [habit];
+  List<Object> get props => [];
+}
+
+class EditHabitState extends AppState {
+  const EditHabitState();
+  // final List<> habit;
+
+  @override
+  List<Object> get props => [];
 }
 
 class ViewHabitState extends AppState {
-  const ViewHabitState(this.habit);
-  final List<HabitDetails> habit;
+  const ViewHabitState();
 
   @override
-  List<Object> get props => [habit];
+  List<Object> get props => [];
 }
 
 class ProfileViewState extends AppState {

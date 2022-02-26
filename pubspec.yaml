@@ -48,6 +48,7 @@ dependencies:
   firebase_database: ^9.0.6
   syncfusion_flutter_charts: ^19.4.53
   fl_chart: ^0.45.0
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:

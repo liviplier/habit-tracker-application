@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/app_colors.dart';
 import 'package:habit_tracker/screens/widgets/hero_dialog_route.dart';
@@ -20,6 +21,20 @@ class _ReminderScreenState extends State<ReminderScreen> {
       setState(() {
         _timeOfDay = value!;
       });
+      try {
+        FirebaseFirestore.instance
+            .collection('project-7335143326376')
+            .doc('Reminders')
+            .update({
+          'Time': _timeOfDay,
+          'Date': _timeOfDay,
+        }).then((value) => const SnackBar(
+                content: Text('Successfully Saved'))); //save to database
+      } catch (e) {
+        return const SnackBar(
+          content: Text("Failed to save"),
+        );
+      }
     });
   }
 
